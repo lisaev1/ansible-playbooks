@@ -37,3 +37,10 @@
       yum:
         name: hylafax-enterprise-appliance
         state: latest
+
+  post_tasks:
+    - name: Disable yum-cron
+      service:
+        name: yum-cron
+        enabled: no
+        state: stopped
