@@ -32,3 +32,8 @@
       yum:
         name: '*'
         state: latest
+
+    - name: Install HylaFAX Enterprise
+      yum:
+        name: hylafax-enterprise-appliance
+        state: latest
