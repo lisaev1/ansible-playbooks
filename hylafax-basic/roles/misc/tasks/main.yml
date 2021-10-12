@@ -17,6 +17,7 @@
   check_mode: yes
   register: grub
   failed_when: grub is changed
+  ignore_errors: yes
 
 - name: Disable kernel dynamic tics
   lineinfile:
