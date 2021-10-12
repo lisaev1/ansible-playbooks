@@ -37,7 +37,7 @@
     - name: Import EPEL 7 key
       rpm_key:
         key: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
-        fingerprint: 91E9 7D7C 4A5E 96F1 7F3E 888F 6A2F AEA2 352C 64E5
+        fingerprint: 91E9 7D7C 4A5E 96F1 7F3E  888F 6A2F AEA2 352C 64E5
         validate_certs: no
         state: present
 
