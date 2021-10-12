@@ -68,6 +68,8 @@
         name: yum-cron
         enabled: no
         state: stopped
+    - name: Clean yum(1) cache
+      command: /usr/bin/yum clean all
 
 
   handlers:
