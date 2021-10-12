@@ -3,29 +3,43 @@
     hylafax
 
   pre_tasks:
+    - name: Have yum(1) check sigs on locally-installed packages
+      ini_file:
+        path: /etc/yum.conf
+        section: main
+        option: localpkg_gpgcheck
+        value: '1'
+        backup: yes
+
     - name: Trust CentOS 7 key
       rpm_key:
         key: /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
         fingerprint: 6341 AB27 53D7 8A78 A7C2  7BB1 24C6 A8A7 F4A8 0EB5
         state: present
 
-    - name: iFAX package signing key
+    - name: Import iFAX package signing key
       rpm_key:
         key: http://repo.ifax.com/yum/RPM-GPG-KEY-iFAX
         fingerprint: 6253 2E3E 58D0 8CB8 199E  5278 8F5A 7A5B DFCA F91C
-        state: present
-
-    - name: Import EPEL 7 key
-      rpm_key:
-        key: https://mirrors.kernel.org/fedora-epel/RPM-GPG-KEY-EPEL-7
-        fingerprint: 91E9 7D7C 4A5E 96F1 7F3E 888F 6A2F AEA2 352C 64E5
-        validate_certs: no
         state: present
 
     - name: Install iFAX repo 6.3
       yum:
         name: http://repo.ifax.com/yum/ifax-ee-6.3.rpm
         state: present
+
+    - name: Install EPEL
+      yum:
+        name: epel-release
+        state: present
+
+    - name: Import EPEL 7 key
+      rpm_key:
+        key: /etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-7
+        fingerprint: 91E9 7D7C 4A5E 96F1 7F3E 888F 6A2F AEA2 352C 64E5
+        validate_certs: no
+        state: present
+
 
   tasks:
     - name: Sysupgrade
