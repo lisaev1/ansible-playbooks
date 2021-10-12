@@ -2,6 +2,7 @@
 - hosts:
     hylafax
 
+
   pre_tasks:
     - name: Have yum(1) check sigs on locally-installed packages
       ini_file:
@@ -40,6 +41,15 @@
         validate_certs: no
         state: present
 
+    - name: Disable kernel dynamic tics
+      lineinfile:
+        path: /etc/default/grub
+        regexp: '^GRUB_CMDLINE_LINUX[ \t]*=[ \t]*"[ \t]*(.*)[ \t]*"'
+        line: 'GRUB_CMDLINE_LINUX="\1 nohz=off"'
+        backrefs: yes
+        backup: yes
+      notify:
+      - update_grub_config
 
   tasks:
     - name: Sysupgrade
@@ -58,3 +68,8 @@
         name: yum-cron
         enabled: no
         state: stopped
+
+
+  handlers:
+  - name: update_grub_config
+    command: /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
