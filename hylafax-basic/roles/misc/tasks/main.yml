@@ -8,6 +8,16 @@
 - name: Clean yum(1) cache
   command: /usr/bin/yum clean all
 
+- name: Disable kernel dynamic tics -- check
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX(.*)nohz=off(.*)'
+    line: ''
+    backrefs: yes
+  check_mode: yes
+  register: grub
+  failed_when: grub is changed
+
 - name: Disable kernel dynamic tics
   lineinfile:
     path: /etc/default/grub
@@ -15,5 +25,6 @@
     line: 'GRUB_CMDLINE_LINUX="\1 nohz=off"'
     backrefs: yes
     backup: yes
+  when: grub is not changed
   notify:
   - update_grub_config
