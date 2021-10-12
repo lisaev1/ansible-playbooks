@@ -1,9 +1,8 @@
 ---
 - hosts:
     hylafax
+
   roles:
+    - role: pre
     - role: yum
-      when: ((ansible_distribution == "CentOS" or
-              ansible_distribution == "Red Hat enterprise Linux") and
-             ansible_distribution_major_version == "7")
     - role: misc

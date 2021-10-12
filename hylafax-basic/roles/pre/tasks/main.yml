@@ -1,0 +1,8 @@
+---
+- name: Check if we are dealing with CentOS 7
+  fail:
+    msg: HylaFAX Enterprise can be installed only on CentOS 7
+  when:
+    not ((ansible_distribution == "CentOS" or
+          ansible_distribution == "Red Hat enterprise Linux") and
+         ansible_distribution_major_version == "7")
