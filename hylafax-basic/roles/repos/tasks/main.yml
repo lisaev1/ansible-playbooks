@@ -1,0 +1,10 @@
+---
+- name: Install iFAX repo 6.3
+  yum:
+    name: http://repo.ifax.com/yum/ifax-ee-6.3.rpm
+    state: present
+
+- name: Install EPEL
+  yum:
+    name: epel-release
+    state: present

@@ -1,0 +1,3 @@
+---
+- name: update_grub_config
+  command: /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
