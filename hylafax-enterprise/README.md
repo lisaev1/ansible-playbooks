@@ -1,4 +1,4 @@
-# An Ansible playbook to provision [HylaFAX Enterprise][1]servers
+# An Ansible playbook to provision [HylaFAX Enterprise][1] servers
 
 ## Requirements
 
