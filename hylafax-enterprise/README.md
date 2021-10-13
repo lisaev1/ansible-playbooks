@@ -1,5 +1,7 @@
 # An Ansible single-file playbook to provision [HylaFAX Enterprise][1] servers
 
+This branch contains a monolithic playbook for HylaFAX Enterprise deployments.
+
 ## Requirements
 
 Currently, HylaFAX Enterprise Edition (HFEE) is built only for [CentOS 7 on x86_64][2].
@@ -9,7 +11,7 @@ Currently, HylaFAX Enterprise Edition (HFEE) is built only for [CentOS 7 on x86_
 First, build the inventory. By default (i.e. in `ansible.cfg`), we assume that it is defined in `inventory.ini` in the current directory. For example:
 ```
 [root@localhost ansible]# ls -p
-ansible.cfg  inventory.ini  playbook.yml  README.md
+ansible.cfg  inventory.ini  playbook.yml  README.md  ssh/
 
 [root@localhost ansible]# cat inventory.ini
 [hylafax]
@@ -20,7 +22,8 @@ ansible_connection=ssh
 ansible_user=root
 ansible_ssh_private_key_file=ssh/ansible-admin.key
 ```
-Per this file, Ansible would execute all tasks as root using SSH key in `ssh/ansible-admin.key`. If this is inappropriate, please modify this file accordingly.
+Per this file, Ansible would execute all tasks as root using SSH key in `ssh/ansible-admin.key`. If such setup is inappropriate for your environment, please
+modify `inventory.ini` accordingly.
 
 Second, execute the playbook as
 ```
