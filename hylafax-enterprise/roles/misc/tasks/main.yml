@@ -28,4 +28,4 @@
     backup: yes
   when: grub is not changed
   notify:
-  - update_grub_config
+    - update_grub_config
