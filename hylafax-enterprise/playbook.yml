@@ -90,9 +90,9 @@
         backup: yes
       when: grub is not changed
       notify:
-      - update_grub_config
+        - update_grub_config
 
 
   handlers:
-  - name: update_grub_config
-    command: /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
+    - name: update_grub_config
+      command: /sbin/grub2-mkconfig -o /boot/grub2/grub.cfg
